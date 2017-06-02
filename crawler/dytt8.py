@@ -16,7 +16,7 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
         }
         try:
             resp_content = requests.get(url, params=params, timeout=30).content.decode('gbk')
-        except Exception, e:
+        except Exception as e:
             #print 'oops~ [%s] [%s:%s]' % (name, self.__class__, e)
             return film_download_info_list
         soup = BeautifulSoup(resp_content, 'html.parser')
