@@ -19,7 +19,10 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
             resp_content = requests.get(url, params=params, timeout=30).content.decode('gbk')
 
             soup = BeautifulSoup(resp_content, 'html.parser')
-            for item in soup.select('.co_content8 table a'):
+            items = soup.select('.co_content8 table a')
+            if self.check_max_item_limit(len(items)) is not True:
+                return film_download_info_list
+            for item in items:
                 item.font.unwrap()
                 title = ''.join(item.contents)
                 info_url = 'http://s.dydytt.net'+item['href']
