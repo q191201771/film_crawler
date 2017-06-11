@@ -19,22 +19,27 @@ class DoubanCrawler(FilmQueryInfoCrawler):
             'filter': 'all',
             'mode':   'grid'
         }
-        while True:
-            resp = requests.get(url=url, params=params, timeout=30)
-            soup = BeautifulSoup(resp.content, 'html.parser')
 
-            for item in soup.select('.article .grid-view .item .info .title a'):
-                origin_name = item.em.string
-                film = FilmQueryInfo(origin_name=origin_name, name=origin_name.split('/')[0].strip())
-                films.append(film)
+        try:
+            while True:
+                resp = requests.get(url=url, params=params, timeout=30)
+                soup = BeautifulSoup(resp.content, 'html.parser')
 
-            next_url_tags = soup.select('.article .paginator .next a')
-            if len(next_url_tags) != 1:
-                break
-            params = None
-            url = next_url_tags[0]['href']
+                for item in soup.select('.article .grid-view .item .info .title a'):
+                    origin_name = item.em.string
+                    film = FilmQueryInfo(origin_name=origin_name, name=origin_name.split('/')[0].strip())
+                    films.append(film)
 
-            time.sleep(1)
+                next_url_tags = soup.select('.article .paginator .next a')
+                if len(next_url_tags) != 1:
+                    break
+                params = None
+                url = next_url_tags[0]['href']
+
+                time.sleep(1)
+        except Exception as e:
+            return films
+
         return films
 
     def _mock_crawl(self):

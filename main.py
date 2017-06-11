@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import time
+from base.log import logger
 from crawler.douban import DoubanCrawler
 from crawler.dy2018 import Dy2018Crawler
 from crawler.dytt8 import Dytt8Crawler
@@ -12,9 +12,9 @@ DOUBAN_USER_ID = '77292145'
 
 if __name__ == '__main__':
     douban_crawler = DoubanCrawler()
-    print('> 开始抓取豆瓣用户[ID:%s]想看的电影...' % DOUBAN_USER_ID)
+    logger.info('> 开始抓取豆瓣用户[ID:{}]想看的电影...'.format(DOUBAN_USER_ID))
     films = douban_crawler.crawl(DOUBAN_USER_ID)
-    print('< 抓取结束，共[%d]部想看的电影.' % len(films))
+    logger.info('< 抓取结束，共[{}]部想看的电影.'.format(len(films)))
 
     download_info_crawlers = [
         Dytt8Crawler(),
@@ -22,11 +22,11 @@ if __name__ == '__main__':
     ]
 
     for film in films:
-        print('> 开始抓取电影名[%s]的下载页面...' % film.name)
+        logger.info('> 开始抓取电影名[{}]的下载页面...'.format(film.name))
         for c in download_info_crawlers:
             film.download_info_list = c.crawl(film.name)
             if len(film.download_info_list) == 0:
                 continue
             for download_info in film.download_info_list:
-                print('  %s - %s' % (download_info.title, download_info.url))
+                logger.info('  {} - {}'.format(download_info.title, download_info.url))
         time.sleep(1)
