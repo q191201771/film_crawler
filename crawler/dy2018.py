@@ -5,8 +5,9 @@
 
 import requests
 from bs4 import BeautifulSoup
-from crawler.base import FilmDownloadInfoCrawler
-from data.film  import FilmDownloadInfo
+from . import FilmDownloadInfoCrawler
+from data import FilmDownloadInfo
+
 
 class Dy2018Crawler(FilmDownloadInfoCrawler):
     def crawl(self, name):
@@ -32,6 +33,6 @@ class Dy2018Crawler(FilmDownloadInfoCrawler):
                 info_url = 'http://www.dy2018.com'+item['href']
                 film_download_info_list.append(FilmDownloadInfo(title=title, url=info_url))
         except Exception as e:
-            return film_download_info_list
+            pass
 
         return film_download_info_list

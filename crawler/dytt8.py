@@ -5,8 +5,10 @@
 
 import requests
 from bs4 import BeautifulSoup
-from crawler.base import FilmDownloadInfoCrawler
-from data.film  import FilmDownloadInfo
+from . import FilmDownloadInfoCrawler
+from data import FilmDownloadInfo
+from base import logger
+
 
 class Dytt8Crawler(FilmDownloadInfoCrawler):
     def crawl(self, name):
@@ -26,11 +28,15 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
             if self.check_max_item_limit(len(items)) is not True:
                 return film_download_info_list
             for item in items:
-                item.font.unwrap()
+                if item.font is not None:
+                    item.font.unwrap()
+                #item.font.unwrap()
                 title = ''.join(item.contents)
                 info_url = 'http://s.dydytt.net'+item['href']
                 film_download_info_list.append(FilmDownloadInfo(title=title, url=info_url))
+        except UnicodeDecodeError:
+            pass
         except Exception as e:
-            return film_download_info_list
+            logger.warn(e)
 
         return film_download_info_list
