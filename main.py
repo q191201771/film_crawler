@@ -48,3 +48,5 @@ if __name__ == '__main__':
             for download_info in film.download_info_list:
                 logger.info('  {} - {}'.format(download_info.title, download_info.url))
         time.sleep(1)
+
+    logger.info('bye...')
