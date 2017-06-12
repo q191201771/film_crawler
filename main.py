@@ -1,10 +1,11 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# @author chef <191201771@qq.com>
+# @brief  xxx
 
 import time
-from base.log import logger
-from crawler.douban import DoubanCrawler
-from crawler.dy2018 import Dy2018Crawler
-from crawler.dytt8 import Dytt8Crawler
+from base import logger
+from crawler import DoubanCrawler, Dy2018Crawler, Dytt8Crawler
 
 # 进入豆瓣个人主页，url后缀ID就是豆瓣用户ID，例如我的
 # https://www.douban.com/people/77292145/

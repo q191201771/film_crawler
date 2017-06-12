@@ -1,4 +1,7 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# @author chef <191201771@qq.com>
+# @brief  xxx
 
 class FilmQueryInfo:
     def __init__(self, origin_name, name, download_info_list=[], douban_rate=None, douban_rate_count=None):

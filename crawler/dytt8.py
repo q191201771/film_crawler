@@ -1,4 +1,7 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# @author chef <191201771@qq.com>
+# @brief  xxx
 
 import requests
 from bs4 import BeautifulSoup
