@@ -3,10 +3,6 @@
 # @author chef <191201771@qq.com>
 # @brief  xxx
 
-import csv
-from data import FilmQueryInfo
-from base import logger
-
 
 class FilmQueryInfoCrawler(object):
     def __init__(self):

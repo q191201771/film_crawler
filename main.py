@@ -4,7 +4,7 @@
 # @brief  xxx
 
 from base import logger, Helper
-from crawler import DoubanCrawler, Dy2018Crawler, Dytt8Crawler
+from crawler import DoubanCrawler, film_download_info_crawler_factory
 from data import PersistenceFilmQueryInfo
 
 ##### 一些配置项
@@ -15,7 +15,7 @@ IS_LOAD_FILM_QUERY_INFO_FROM_FILE = False
 # 从豆瓣抓取完想看电影后，是否写入本地文件中
 IS_SAVE_FILM_QUERY_INFO_TO_FILE = True
 # 是否从豆瓣抓取评分等详细信息
-IS_FETCH_FILM_QUERY_DETAIL_INFO = True
+IS_FETCH_FILM_QUERY_DETAIL_INFO = False
 
 
 def fetch_film_query_info():
@@ -38,8 +38,8 @@ if __name__ == '__main__':
     films= fetch_film_query_info()
 
     download_info_crawlers = [
-        Dytt8Crawler(),
-        Dy2018Crawler()
+        film_download_info_crawler_factory('dy2018'),
+        film_download_info_crawler_factory('dytt8')
     ]
 
     for film in films:

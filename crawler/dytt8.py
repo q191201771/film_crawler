@@ -5,7 +5,7 @@
 
 import requests
 from bs4 import BeautifulSoup
-from . import FilmDownloadInfoCrawler
+from .base import FilmDownloadInfoCrawler
 from data import FilmDownloadInfo
 from base import logger
 
