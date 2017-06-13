@@ -30,7 +30,7 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
             for item in items:
                 if item.font is not None:
                     item.font.unwrap()
-                #item.font.unwrap()
+                # item.font.unwrap()
                 title = ''.join(item.contents)
                 info_url = 'http://s.dydytt.net'+item['href']
                 film_download_info_list.append(FilmDownloadInfo(title=title, url=info_url))

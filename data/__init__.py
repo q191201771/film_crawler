@@ -3,7 +3,7 @@
 # @author chef <191201771@qq.com>
 # @brief  xxx
 
-from .film import FilmQueryInfo
-from .film import FilmDownloadInfo
+from .film import FilmQueryInfo, FilmDownloadInfo
+from .persistence_film import PersistenceFilmQueryInfo
 
-__all__ = ['FilmQueryInfo', 'FilmDownloadInfo']
+__all__ = ['FilmQueryInfo', 'FilmDownloadInfo', 'PersistenceFilmQueryInfo']

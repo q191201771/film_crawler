@@ -6,6 +6,7 @@
 import time
 from base import logger
 from crawler import DoubanCrawler, Dy2018Crawler, Dytt8Crawler
+from data import PersistenceFilmQueryInfo
 
 ##### 一些配置项
 # 进入豆瓣个人主页，url后缀ID就是豆瓣用户ID，例如我的 https://www.douban.com/people/77292145/
@@ -15,18 +16,19 @@ LOAD_FILM_QUERY_INFO_FROM_FILE = False
 # 从豆瓣抓取完想看电影后，是否写入本地文件中
 SAVE_FILM_QUERY_INFO_TO_FILE = True
 
+
 def fetch_film_query_info():
-    douban_crawler = DoubanCrawler()
     films = []
     if LOAD_FILM_QUERY_INFO_FROM_FILE:
         logger.info('> 开始读取本地文件中缓存想看的电影...')
-        films = douban_crawler.load_from_file()
+        films = PersistenceFilmQueryInfo.load_from_file()
         logger.info('< 读取结束，共[{}]部想看的电影.'.format(len(films)))
     else:
         logger.info('> 开始抓取豆瓣用户[ID:{}]想看的电影...'.format(DOUBAN_USER_ID))
+        douban_crawler = DoubanCrawler()
         films = douban_crawler.crawl(DOUBAN_USER_ID)
         if SAVE_FILM_QUERY_INFO_TO_FILE:
-            douban_crawler.save_to_file()
+            PersistenceFilmQueryInfo.save_to_file(films)
         logger.info('< 抓取结束，共[{}]部想看的电影.'.format(len(films)))
 
     return films
