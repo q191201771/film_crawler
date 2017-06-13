@@ -6,7 +6,7 @@
 
 class FilmQueryInfoCrawler(object):
     def __init__(self):
-        self.film_query_info_array = []
+        self.film_query_info_list = []
 
     def crawl(self, userid):
         raise NotImplementedError

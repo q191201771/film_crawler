@@ -26,7 +26,7 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
 
             soup = BeautifulSoup(resp_content, 'html.parser')
             items = soup.select('.co_content8 table a')
-            if self.check_max_item_limit(len(items)) is not True:
+            if not self.check_max_item_limit(len(items)):
                 return film_download_info_list
             for item in items:
                 if item.font is not None:

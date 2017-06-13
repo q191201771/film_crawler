@@ -15,7 +15,7 @@ IS_LOAD_FILM_QUERY_INFO_FROM_FILE = False
 # 从豆瓣抓取完想看电影后，是否写入本地文件中
 IS_SAVE_FILM_QUERY_INFO_TO_FILE = True
 # 是否从豆瓣抓取评分等详细信息
-IS_FETCH_FILM_QUERY_DETAIL_INFO = False
+IS_FETCH_FILM_QUERY_DETAIL_INFO = True
 
 
 def fetch_film_query_info():
@@ -50,7 +50,7 @@ if __name__ == '__main__':
                                                                         film.detail_info.douban_rate_people))
         for c in download_info_crawlers:
             film.download_info_list = c.crawl(film.name)
-            if len(film.download_info_list) == 0:
+            if not film.download_info_list:
                 continue
             for download_info in film.download_info_list:
                 logger.info('  {} - {}'.format(download_info.title, download_info.url))

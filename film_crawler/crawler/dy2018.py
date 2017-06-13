@@ -28,7 +28,7 @@ class Dy2018Crawler(FilmDownloadInfoCrawler):
 
             soup = BeautifulSoup(resp_content, 'html.parser')
             items = soup.select('.co_content8 a.ulink')
-            if self.check_max_item_limit(len(items)) is not True:
+            if not self.check_max_item_limit(len(items)):
                 return film_download_info_list
             for item in items:
                 title = item.string
