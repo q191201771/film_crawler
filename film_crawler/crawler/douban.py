@@ -5,9 +5,10 @@
 
 import requests
 from bs4 import BeautifulSoup
+
+from film_crawler.base import Helper
+from film_crawler.data import FilmQueryInfo, FilmQueryDetailInfo
 from . import FilmQueryInfoCrawler
-from data import FilmQueryInfo, FilmQueryDetailInfo
-from base import Helper
 
 
 class DoubanCrawler(FilmQueryInfoCrawler):

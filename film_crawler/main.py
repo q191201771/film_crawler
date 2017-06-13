@@ -3,9 +3,9 @@
 # @author chef <191201771@qq.com>
 # @brief  xxx
 
-from base import logger, Helper
-from crawler import DoubanCrawler, film_download_info_crawler_factory
-from data import PersistenceFilmQueryInfo
+from film_crawler.base import logger, Helper
+from film_crawler.crawler import DoubanCrawler, film_download_info_crawler_factory
+from film_crawler.data import PersistenceFilmQueryInfo
 
 ##### 一些配置项
 # 进入豆瓣个人主页，url后缀ID就是豆瓣用户ID，例如我的 https://www.douban.com/people/77292145/

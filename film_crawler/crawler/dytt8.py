@@ -5,9 +5,10 @@
 
 import requests
 from bs4 import BeautifulSoup
+
+from film_crawler.base import logger
+from film_crawler.data import FilmDownloadInfo
 from .base import FilmDownloadInfoCrawler
-from data import FilmDownloadInfo
-from base import logger
 
 
 class Dytt8Crawler(FilmDownloadInfoCrawler):
