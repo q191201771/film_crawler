@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from . import FilmDownloadInfoCrawler
 from data import FilmDownloadInfo
+from base import logger
 
 
 class Dy2018Crawler(FilmDownloadInfoCrawler):
@@ -32,7 +33,9 @@ class Dy2018Crawler(FilmDownloadInfoCrawler):
                 title = item.string
                 info_url = 'http://www.dy2018.com'+item['href']
                 film_download_info_list.append(FilmDownloadInfo(title=title, url=info_url))
-        except Exception as e:
+        except UnicodeDecodeError:
             pass
+        except Exception as e:
+            logger.warn(e)
 
         return film_download_info_list

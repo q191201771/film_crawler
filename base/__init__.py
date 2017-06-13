@@ -4,5 +4,6 @@
 # @brief  xxx
 
 from .log import logger
+from .helper import Helper
 
-__all__ = ['logger']
+__all__ = ['logger', 'Helper']
