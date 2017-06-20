@@ -6,7 +6,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from film_crawler.base import Helper, logger
+from film_crawler.base import Helper, logger, Config
 from film_crawler.data import FilmQueryInfo, FilmQueryDetailInfo
 from . import FilmQueryInfoCrawler
 
@@ -36,7 +36,7 @@ class DoubanCrawler(FilmQueryInfoCrawler):
 
                     if is_fetch_detail_info:
                         film.detail_info = self.crawl_detail_info(film.douban_url)
-                        Helper.sleep_uniform(0.5, 1)
+                        Helper.sleep_uniform(Config.CRAWL_INTERVAL_MIN_SEC, Config.CRAWL_INTERVAL_MAX_SEC)
 
                 next_page = soup.select('.article .paginator .next a')
                 if len(next_page) != 1:
@@ -44,7 +44,7 @@ class DoubanCrawler(FilmQueryInfoCrawler):
                 params = None
                 url = next_page[0]['href']
 
-                Helper.sleep_uniform(0.5, 1)
+                Helper.sleep_uniform(Config.CRAWL_INTERVAL_MIN_SEC, Config.CRAWL_INTERVAL_MAX_SEC)
         except Exception as e:
             logger.warn(e)
 

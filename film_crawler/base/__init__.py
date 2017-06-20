@@ -5,5 +5,6 @@
 
 from .log import logger
 from .helper import Helper
+from .config import Config
 
-__all__ = ['logger', 'Helper']
+__all__ = ['logger', 'Helper', 'Config']
