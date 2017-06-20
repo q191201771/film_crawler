@@ -8,7 +8,7 @@ class Config:
     # 进入豆瓣个人主页，url后缀ID就是豆瓣用户ID，例如我的 https://www.douban.com/people/77292145/
     DOUBAN_USER_ID = '77292145'
     # 不从豆瓣抓想看电影，直接从本地文件加载
-    IS_LOAD_FILM_QUERY_INFO_FROM_FILE = True
+    IS_LOAD_FILM_QUERY_INFO_FROM_FILE = False
     # 从豆瓣抓取完想看电影后，是否写入本地文件中
     IS_SAVE_FILM_QUERY_INFO_TO_FILE = True
     # 是否从豆瓣抓取评分等详细信息
