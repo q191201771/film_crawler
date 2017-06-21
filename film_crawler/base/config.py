@@ -3,6 +3,19 @@
 # @author chef <191201771@qq.com>
 # @brief  配置项
 
+from enum import Enum
+
+
+FILM_QUERY_INFO_TYPE_READABLE_MAPPING = {
+    'collect': '已看',
+    'wish': '想看'
+}
+
+FILM_QUERY_INFO_TYPE_FILENAME_MAPPING = {
+    'collect': 'query_info_collect.csv',
+    'wish': 'query_info_wish.csv'
+}
+
 
 class Config:
     class ConstError(TypeError):
@@ -14,9 +27,13 @@ class Config:
     # 1. 外部配置相关
     # 进入豆瓣个人主页，url后缀ID就是豆瓣用户ID，例如我的 https://www.douban.com/people/77292145/
     DOUBAN_USER_ID = '77292145'
+    # 已看 collect 想看 wish
+    DOUBAN_FILM_QUERY_INFO_TYPE = 'collect'
+    DOUBAN_FILM_QUERY_INFO_TYPE_READABLE = FILM_QUERY_INFO_TYPE_READABLE_MAPPING[DOUBAN_FILM_QUERY_INFO_TYPE]
+    DOUBAN_FILM_QUERY_INFO_FILENAME = FILM_QUERY_INFO_TYPE_FILENAME_MAPPING[DOUBAN_FILM_QUERY_INFO_TYPE]
     # 2. 流程控制相关
     # 是否直接从本地文件加载
-    IS_LOAD_FILM_QUERY_INFO_FROM_FILE = True
+    IS_LOAD_FILM_QUERY_INFO_FROM_FILE = False
     # 是否写入本地文件中
     IS_SAVE_FILM_QUERY_INFO_TO_FILE = True
     # 是否抓取详细信息

@@ -8,7 +8,7 @@ class FilmQueryInfoCrawler(object):
     def __init__(self):
         self.film_query_info_list = []
 
-    def crawl(self, userid):
+    def crawl(self, userid, query_info_type, is_fetch_detail_info):
         raise NotImplementedError
 
 

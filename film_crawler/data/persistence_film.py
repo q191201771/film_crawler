@@ -10,7 +10,7 @@ from film_crawler.base import logger
 
 class PersistenceFilmQueryInfo(object):
     @staticmethod
-    def save_to_file(film_query_info_list, filename='film_query_info.csv'):
+    def save_to_file(film_query_info_list, filename):
         with open(filename, mode='w', encoding='utf-8') as file:
             writer = csv.writer(file, lineterminator='\n')
 
@@ -36,7 +36,7 @@ class PersistenceFilmQueryInfo(object):
                     logger.warn(e)
 
     @staticmethod
-    def load_from_file(filename='film_query_info.csv'):
+    def load_from_file(filename):
         film_query_info_list = []
         with open(filename, encoding='utf-8') as file:
             reader = csv.reader(file, lineterminator='\n')

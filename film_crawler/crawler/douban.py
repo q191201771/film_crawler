@@ -12,9 +12,9 @@ from . import FilmQueryInfoCrawler
 
 
 class DoubanCrawler(FilmQueryInfoCrawler):
-    def crawl(self, userid, is_fetch_detail_info=False):
+    def crawl(self, userid, query_info_type, is_fetch_detail_info):
         """return Film list"""
-        url = 'https://movie.douban.com/people/{userid}/wish'.format(userid = userid)
+        url = 'https://movie.douban.com/people/{}/{}'.format(userid, query_info_type)
         params = {
             'start':  '0',
             'sort':   'time',
@@ -77,7 +77,6 @@ class DoubanCrawler(FilmQueryInfoCrawler):
                     continue
                 k = kv[0].strip()
                 v = kv[1].strip()
-                # TODO 这里能不能mapping得漂亮点，还是对类对象这块基础知识掌握的不扎实
                 if k == '导演': info.director = single_op(v)
                 if k == '编剧': info.writer = single_op(v)
                 if k == '主演': info.cast_list = multi_op(v)

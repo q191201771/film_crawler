@@ -9,18 +9,20 @@ from film_crawler.data import PersistenceFilmQueryInfo, StatFilmQueryInfo
 
 
 def film_query_info_wrapper():
+    logger.info('豆瓣用户[ID:{}][{}]的电影'.format(Config.DOUBAN_USER_ID, Config.DOUBAN_FILM_QUERY_INFO_TYPE_READABLE))
     films = []
     if Config.IS_LOAD_FILM_QUERY_INFO_FROM_FILE:
-        logger.info('> 开始读取本地文件中缓存想看的电影...')
-        films = PersistenceFilmQueryInfo.load_from_file()
-        logger.info('< 读取结束，共[{}]部想看的电影.'.format(len(films)))
+        logger.info('> 开始读取本地文件...')
+        films = PersistenceFilmQueryInfo.load_from_file(Config.DOUBAN_FILM_QUERY_INFO_FILENAME)
+        logger.info('< 读取结束，共[{}]部.'.format(len(films)))
     else:
-        logger.info('> 开始抓取豆瓣用户[ID:{}]想看的电影...'.format(Config.DOUBAN_USER_ID))
+        logger.info('> 开始抓取...')
         douban_crawler = DoubanCrawler()
-        films = douban_crawler.crawl(Config.DOUBAN_USER_ID, Config.IS_FETCH_FILM_QUERY_DETAIL_INFO)
+        films = douban_crawler.crawl(Config.DOUBAN_USER_ID, Config.DOUBAN_FILM_QUERY_INFO_TYPE,
+                                     Config.IS_FETCH_FILM_QUERY_DETAIL_INFO)
         if Config.IS_SAVE_FILM_QUERY_INFO_TO_FILE:
-            PersistenceFilmQueryInfo.save_to_file(films)
-        logger.info('< 抓取结束，共[{}]部想看的电影.'.format(len(films)))
+            PersistenceFilmQueryInfo.save_to_file(films, Config.DOUBAN_FILM_QUERY_INFO_FILENAME)
+        logger.info('< 抓取结束，共[{}]部.'.format(len(films)))
 
     StatFilmQueryInfo.stat_type_list(films, 'stat_type_list.jpg')
     StatFilmQueryInfo.stat_cast_list(films, 'stat_cast_list.jpg')
@@ -35,11 +37,8 @@ def film_download_info_wrapper(films):
     ]
 
     for film in films:
-        if film.detail_info is None:
-            logger.info('> 开始抓取电影名[{}]的下载页面...'.format(film.name))
-        else:
-            logger.info('> 开始抓取电影名[{}]的下载页面({} {})...'.format(film.name, film.detail_info.douban_rate,
-                                                                        film.detail_info.douban_rate_people))
+        logger.info('> 开始抓取电影名[{}]的下载页面({} {})...'.format(film.name, film.detail_info.douban_rate,
+                                                                   film.detail_info.douban_rate_people))
         for c in download_info_crawlers:
             film.download_info_list = c.crawl(film.name)
             for download_info in film.download_info_list:
