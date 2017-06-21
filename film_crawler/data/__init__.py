@@ -5,5 +5,6 @@
 
 from .film import FilmQueryDetailInfo, FilmQueryInfo, FilmDownloadInfo
 from .persistence_film import PersistenceFilmQueryInfo
+from .stat_film import StatFilmQueryInfo
 
-__all__ = ['FilmQueryDetailInfo', 'FilmQueryInfo', 'FilmDownloadInfo', 'PersistenceFilmQueryInfo']
+__all__ = ['FilmQueryDetailInfo', 'FilmQueryInfo', 'FilmDownloadInfo', 'PersistenceFilmQueryInfo', 'StatFilmQueryInfo']

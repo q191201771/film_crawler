@@ -1,5 +1,9 @@
-*.pyc
-.idea
+
 *.csv
 *.log
+*.jpg
+
+*.pyc
+.idea
 .tags
+.DS_Store

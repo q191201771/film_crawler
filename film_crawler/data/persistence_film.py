@@ -25,6 +25,7 @@ class PersistenceFilmQueryInfo(object):
                                          item.detail_info.douban_rate_people,
                                          item.detail_info.director,
                                          item.detail_info.writer,
+                                         '/'.join(item.detail_info.cast_list),
                                          '/'.join(item.detail_info.type_list),
                                          item.detail_info.country,
                                          item.detail_info.release_time,
@@ -45,10 +46,11 @@ class PersistenceFilmQueryInfo(object):
                 film.detail_info.douban_rate_people = row[3]
                 film.detail_info.director = row[4]
                 film.detail_info.writer = row[5]
-                film.detail_info.type_list = row[6].split('/')
-                film.detail_info.country = row[7]
-                film.detail_info.release_time = row[8]
-                film.detail_info.duration = row[9]
+                film.detail_info.cast_list = row[6].split('/')
+                film.detail_info.type_list = row[7].split('/')
+                film.detail_info.country = row[8]
+                film.detail_info.release_time = row[9]
+                film.detail_info.duration = row[10]
                 film_query_info_list.append(film)
 
         return film_query_info_list

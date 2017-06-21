@@ -5,10 +5,10 @@
 
 from film_crawler.base import logger, Helper, Config
 from film_crawler.crawler import DoubanCrawler, film_download_info_crawler_factory
-from film_crawler.data import PersistenceFilmQueryInfo
+from film_crawler.data import PersistenceFilmQueryInfo, StatFilmQueryInfo
 
 
-def fetch_film_query_info():
+def film_query_info_wrapper():
     films = []
     if Config.IS_LOAD_FILM_QUERY_INFO_FROM_FILE:
         logger.info('> 开始读取本地文件中缓存想看的电影...')
@@ -22,11 +22,13 @@ def fetch_film_query_info():
             PersistenceFilmQueryInfo.save_to_file(films)
         logger.info('< 抓取结束，共[{}]部想看的电影.'.format(len(films)))
 
+    StatFilmQueryInfo.stat_type_list(films, 'stat_type_list.jpg')
+    StatFilmQueryInfo.stat_cast_list(films, 'stat_cast_list.jpg')
+
     return films
 
-if __name__ == '__main__':
-    films= fetch_film_query_info()
 
+def film_download_info_wrapper(films):
     download_info_crawlers = [
         film_download_info_crawler_factory('dy2018'),
         film_download_info_crawler_factory('dytt8')
@@ -44,4 +46,8 @@ if __name__ == '__main__':
                 logger.info('  {} - {}'.format(download_info.title, download_info.url))
         Helper.sleep_uniform(Config.CRAWL_INTERVAL_MIN_SEC, Config.CRAWL_INTERVAL_MAX_SEC)
 
+if __name__ == '__main__':
+    films= film_query_info_wrapper()
+    if Config.IS_FETCH_FILM_DOWNLOAD_INFO:
+        film_download_info_wrapper(films)
     logger.info('bye...')
