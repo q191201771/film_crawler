@@ -10,27 +10,25 @@ from wordcloud import WordCloud
 class StatFilmQueryInfo(object):
     @staticmethod
     def stat_type_list(film_query_info_list, filename):
-        frequencies = defaultdict(lambda: 0.0)
-        for item in film_query_info_list:
-            for t in item.detail_info.type_list:
-                if t:
-                    frequencies[t] += 1
-
-        StatFilmQueryInfo.save_word_cloud(frequencies, filename)
+        stat_at_detail_info(film_query_info_list, filename, 'type_list')
 
     @staticmethod
     def stat_cast_list(film_query_info_list, filename):
-        frequencies = defaultdict(lambda: 0.0)
-        for item in film_query_info_list:
-            for t in item.detail_info.cast_list:
-                if t:
-                    frequencies[t] += 1
+        stat_at_detail_info(film_query_info_list, filename, 'cast_list')
 
-        StatFilmQueryInfo.save_word_cloud(frequencies, filename)
 
-    @staticmethod
-    def save_word_cloud(frequencies, filename):
-        wc = WordCloud(font_path='Arial Unicode.ttf', background_color='white', height=400, width=800)
-        wc.generate_from_frequencies(frequencies)
-        wc.to_image().show()
-        wc.to_file(filename)
+def stat_at_detail_info(film_query_info_list, filename, attrname):
+    frequencies = defaultdict(lambda: 0.0)
+    for film in film_query_info_list:
+        for item in film.detail_info.__dict__[attrname]:
+            if item:
+                frequencies[item] += 1
+
+    save_word_cloud(frequencies, filename)
+
+
+def save_word_cloud(frequencies, filename):
+    wc = WordCloud(font_path='Arial Unicode.ttf', background_color='white', height=400, width=800)
+    wc.generate_from_frequencies(frequencies)
+    wc.to_image().show()
+    wc.to_file(filename)
