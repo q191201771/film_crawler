@@ -25,7 +25,7 @@ class DoubanCrawler(FilmQueryInfoCrawler):
 
         try:
             while True:
-                resp = requests.get(url=url, params=params, timeout=30)
+                resp = requests.get(url=url, params=params, timeout=30, headers=Config.CRAWLER_BASIC_HEADERS)
                 soup = BeautifulSoup(resp.content, 'html.parser')
 
                 for item in soup.select('.article .grid-view .item .info .title a'):

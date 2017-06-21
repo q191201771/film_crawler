@@ -11,7 +11,7 @@ from film_crawler.base import logger
 class PersistenceFilmQueryInfo(object):
     @staticmethod
     def save_to_file(film_query_info_list, filename='film_query_info.csv'):
-        with open(filename, 'w') as file:
+        with open(filename, mode='w', encoding='utf-8') as file:
             writer = csv.writer(file, lineterminator='\n')
 
             for item in film_query_info_list:
@@ -37,7 +37,7 @@ class PersistenceFilmQueryInfo(object):
     @staticmethod
     def load_from_file(filename='film_query_info.csv'):
         film_query_info_list = []
-        with open(filename) as file:
+        with open(filename, encoding='utf-8') as file:
             reader = csv.reader(file, lineterminator='\n')
             for row in reader:
                 film = FilmQueryInfo(origin_name=row[0], name=row[1])
