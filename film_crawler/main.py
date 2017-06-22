@@ -26,6 +26,9 @@ def film_query_info_wrapper():
 
     StatFilmQueryInfo.stat_type_list(films, 'stat_type_list.jpg')
     StatFilmQueryInfo.stat_cast_list(films, 'stat_cast_list.jpg')
+    StatFilmQueryInfo.stat_director_list(films, 'stat_director_list.jpg')
+    StatFilmQueryInfo.stat_writer_list(films, 'stat_writer_list.jpg')
+    StatFilmQueryInfo.stat_country_list(films, 'stat_country_list.jpg')
 
     return films
 

@@ -26,6 +26,7 @@ class DoubanCrawler(FilmQueryInfoCrawler):
         try:
             while True:
                 resp = requests.get(url=url, params=params, timeout=30, headers=Config.CRAWLER_BASIC_HEADERS)
+                logger.debug('crawl {}...'.format(url))
                 soup = BeautifulSoup(resp.content, 'html.parser')
 
                 for item in soup.select('.article .grid-view .item .info .title a'):
@@ -52,6 +53,7 @@ class DoubanCrawler(FilmQueryInfoCrawler):
 
     def crawl_detail_info(self, url):
         resp = requests.get(url=url, timeout=30)
+        logger.debug('crawl {}...'.format(url))
         soup = BeautifulSoup(resp.content, 'html.parser')
 
         info = FilmQueryDetailInfo()
@@ -77,14 +79,14 @@ class DoubanCrawler(FilmQueryInfoCrawler):
                     continue
                 k = kv[0].strip()
                 v = kv[1].strip()
-                if k == '导演': info.director = single_op(v)
-                if k == '编剧': info.writer = single_op(v)
+                if k == '导演': info.director_list = multi_op(v)
+                if k == '编剧': info.writer_list = multi_op(v)
                 if k == '主演': info.cast_list = multi_op(v)
                 if k == '类型': info.type_list = multi_op(v)
-                if k == '制片国家/地区': info.country = single_op(v)
+                if k == '制片国家/地区': info.country_list = multi_op(v)
                 if k == '语言': info.lang = single_op(v)
-                if k == '上映日期': info.release_time = single_op(v)
-                if k == '片长': info.duration = single_op(v)
+                if k == '上映日期': info.release_time_list = multi_op(v)
+                if k == '片长': info.duration_list = multi_op(v)
                 if k == '又名': info.alias = single_op(v)
                 if k == 'IMDb链接': info.imdb = single_op(v)
 

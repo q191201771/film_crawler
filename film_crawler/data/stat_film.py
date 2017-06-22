@@ -16,6 +16,18 @@ class StatFilmQueryInfo(object):
     def stat_cast_list(film_query_info_list, filename):
         stat_at_detail_info(film_query_info_list, filename, 'cast_list')
 
+    @staticmethod
+    def stat_director_list(film_query_info_list, filename):
+        stat_at_detail_info(film_query_info_list, filename, 'director_list')
+
+    @staticmethod
+    def stat_writer_list(film_query_info_list, filename):
+        stat_at_detail_info(film_query_info_list, filename, 'writer_list')
+
+    @staticmethod
+    def stat_country_list(film_query_info_list, filename):
+        stat_at_detail_info(film_query_info_list, filename, 'country_list')
+
 
 def stat_at_detail_info(film_query_info_list, filename, attrname):
     frequencies = defaultdict(lambda: 0.0)

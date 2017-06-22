@@ -8,16 +8,16 @@ class FilmQueryDetailInfo(object):
     def __init__(self):
         self.douban_rate = None
         self.douban_rate_people = None
-        self.director = None
-        self.writer = None
+        self.director_list = []
+        self.writer_list = []
         self.cast_list = []
         self.type_list = []
-        self.country = None # TODO can be list
-        self.lang = None # can be list
-        self.release_time = None # can be list
-        self.duration = None
-        self.alias = None # can be list
-        self.imdb = None
+        self.country_list = []
+        self.lang = None # not persistence
+        self.release_time_list = []
+        self.duration_list = []
+        self.alias = None # not persistence
+        self.imdb = None # not persistence
 
 
 class FilmDownloadInfo(object):

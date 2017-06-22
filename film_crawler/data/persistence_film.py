@@ -23,13 +23,13 @@ class PersistenceFilmQueryInfo(object):
                                          item.name,
                                          item.detail_info.douban_rate,
                                          item.detail_info.douban_rate_people,
-                                         item.detail_info.director,
-                                         item.detail_info.writer,
+                                         '/'.join(item.detail_info.director_list),
+                                         '/'.join(item.detail_info.writer_list),
                                          '/'.join(item.detail_info.cast_list),
                                          '/'.join(item.detail_info.type_list),
-                                         item.detail_info.country,
-                                         item.detail_info.release_time,
-                                         item.detail_info.duration])
+                                         '/'.join(item.detail_info.country_list),
+                                         '/'.join(item.detail_info.release_time_list),
+                                         '/'.join(item.detail_info.duration_list)])
                 except UnicodeEncodeError:
                     pass
                 except Exception as e:
@@ -44,13 +44,13 @@ class PersistenceFilmQueryInfo(object):
                 film = FilmQueryInfo(origin_name=row[0], name=row[1])
                 film.detail_info.douban_rate = row[2]
                 film.detail_info.douban_rate_people = row[3]
-                film.detail_info.director = row[4]
-                film.detail_info.writer = row[5]
+                film.detail_info.director_list = row[4].split('/')
+                film.detail_info.writer_list = row[5].split('/')
                 film.detail_info.cast_list = row[6].split('/')
                 film.detail_info.type_list = row[7].split('/')
-                film.detail_info.country = row[8]
-                film.detail_info.release_time = row[9]
-                film.detail_info.duration = row[10]
+                film.detail_info.country_list = row[8].split('/')
+                film.detail_info.release_time_list = row[9].split('/')
+                film.detail_info.duration_list = row[10].split('/')
                 film_query_info_list.append(film)
 
         return film_query_info_list
