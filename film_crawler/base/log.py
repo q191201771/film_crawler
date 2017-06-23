@@ -15,3 +15,4 @@ file_handler = logging.FileHandler('film_crawler.log', mode='w', encoding='utf-8
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.setLevel(logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)

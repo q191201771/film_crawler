@@ -3,7 +3,7 @@
 # @author chef <191201771@qq.com>
 # @brief  配置项
 
-from enum import Enum
+import random
 
 
 FILM_QUERY_INFO_TYPE_READABLE_MAPPING = {
@@ -48,8 +48,14 @@ class Config:
     # 抓取间隔时间最大值
     CRAWL_INTERVAL_MAX_SEC = 0.7
     # UA
-    CRAWLER_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    USER_AGENT_LIST = [
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.1 Safari/603.1.30',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:46.0) Gecko/20100101 Firefox/46.0',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/13.10586',
+        'Mozilla/5.0 (Windows NT 6.3; Win64, x64; Trident/7.0; rv:11.0) like Gecko'
+    ]
     # 最简单的http request header
     CRAWLER_BASIC_HEADERS = {
-        'User-Agent': CRAWLER_USER_AGENT
+        'User-Agent': random.choice(USER_AGENT_LIST)
     }
