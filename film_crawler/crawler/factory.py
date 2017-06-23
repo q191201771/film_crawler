@@ -5,11 +5,15 @@
 
 from .dy2018 import Dy2018Crawler
 from .dytt8 import Dytt8Crawler
+from .base import FilmDownloadInfoCrawler
 
 
-def film_download_info_crawler_factory(source):
-    mapping = {
-        'dy2018': Dy2018Crawler(),
-        'dytt8': Dytt8Crawler()
-    }
-    return mapping[source]
+class FilmDownloadInfoCrawlerFactory(object):
+    crawlers = {'dy2018': Dy2018Crawler,
+                'dytt8': Dytt8Crawler}
+
+    def __new__(cls, name):
+        if name in cls.crawlers:
+            return cls.crawlers[name]()
+        else:
+            return FilmDownloadInfoCrawler()

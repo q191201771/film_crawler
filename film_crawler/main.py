@@ -4,7 +4,7 @@
 # @brief  xxx
 
 from film_crawler.base import logger, Helper, Config
-from film_crawler.crawler import DoubanCrawler, film_download_info_crawler_factory
+from film_crawler.crawler import DoubanCrawler, FilmDownloadInfoCrawlerFactory
 from film_crawler.data import PersistenceFilmQueryInfo, StatFilmQueryInfo
 
 
@@ -35,8 +35,8 @@ def film_query_info_wrapper():
 
 def film_download_info_wrapper(films):
     download_info_crawlers = [
-        film_download_info_crawler_factory('dy2018'),
-        film_download_info_crawler_factory('dytt8')
+        FilmDownloadInfoCrawlerFactory('dy2018'),
+        FilmDownloadInfoCrawlerFactory('dytt8')
     ]
 
     for film in films:
