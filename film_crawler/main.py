@@ -24,11 +24,11 @@ def film_query_info_wrapper():
             PersistenceFilmQueryInfo.save_to_file(films, Config.DOUBAN_FILM_QUERY_INFO_FILENAME)
         logger.info('< 抓取结束，共[{}]部.'.format(len(films)))
 
-    StatFilmQueryInfo.stat_type_list(films, 'stat_type_list.jpg')
-    StatFilmQueryInfo.stat_cast_list(films, 'stat_cast_list.jpg')
-    StatFilmQueryInfo.stat_director_list(films, 'stat_director_list.jpg')
-    StatFilmQueryInfo.stat_writer_list(films, 'stat_writer_list.jpg')
-    StatFilmQueryInfo.stat_country_list(films, 'stat_country_list.jpg')
+    StatFilmQueryInfo.stat_type_list(films, 'stat_type_list.png')
+    StatFilmQueryInfo.stat_cast_list(films, 'stat_cast_list.png')
+    StatFilmQueryInfo.stat_director_list(films, 'stat_director_list.png')
+    StatFilmQueryInfo.stat_writer_list(films, 'stat_writer_list.png')
+    StatFilmQueryInfo.stat_country_list(films, 'stat_country_list.png')
 
     return films
 

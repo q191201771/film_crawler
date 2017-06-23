@@ -28,8 +28,6 @@ class Dy2018Crawler(FilmDownloadInfoCrawler):
 
             soup = BeautifulSoup(resp_content, 'html.parser')
             items = soup.select('.co_content8 a.ulink')
-            if not self.check_max_item_limit(len(items)):
-                return film_download_info_list
             for item in items:
                 title = item.string
                 info_url = 'http://www.dy2018.com'+item['href']
@@ -39,4 +37,4 @@ class Dy2018Crawler(FilmDownloadInfoCrawler):
         except Exception as e:
             logger.warn(e)
 
-        return film_download_info_list
+        return self.filter(name, film_download_info_list)

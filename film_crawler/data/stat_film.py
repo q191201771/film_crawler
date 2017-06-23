@@ -42,5 +42,5 @@ def stat_at_detail_info(film_query_info_list, filename, attrname):
 def save_word_cloud(frequencies, filename):
     wc = WordCloud(font_path='Arial Unicode.ttf', background_color='white', height=400, width=800)
     wc.generate_from_frequencies(frequencies)
-    wc.to_image().show()
+    # wc.to_image().show()
     wc.to_file(filename)

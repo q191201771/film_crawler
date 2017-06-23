@@ -16,20 +16,17 @@ class PersistenceFilmQueryInfo(object):
 
             for item in film_query_info_list:
                 try:
-                    if item.detail_info is None:
-                        writer.writerow([item.origin_name, item.name])
-                    else:
-                        writer.writerow([item.origin_name,
-                                         item.name,
-                                         item.detail_info.douban_rate,
-                                         item.detail_info.douban_rate_people,
-                                         '/'.join(item.detail_info.director_list),
-                                         '/'.join(item.detail_info.writer_list),
-                                         '/'.join(item.detail_info.cast_list),
-                                         '/'.join(item.detail_info.type_list),
-                                         '/'.join(item.detail_info.country_list),
-                                         '/'.join(item.detail_info.release_time_list),
-                                         '/'.join(item.detail_info.duration_list)])
+                    writer.writerow([item.origin_name,
+                                     item.name,
+                                     item.detail_info.douban_rate,
+                                     item.detail_info.douban_rate_people,
+                                     '/'.join(item.detail_info.director_list),
+                                     '/'.join(item.detail_info.writer_list),
+                                     '/'.join(item.detail_info.cast_list),
+                                     '/'.join(item.detail_info.type_list),
+                                     '/'.join(item.detail_info.country_list),
+                                     '/'.join(item.detail_info.release_time_list),
+                                     '/'.join(item.detail_info.duration_list)])
                 except UnicodeEncodeError:
                     pass
                 except Exception as e:

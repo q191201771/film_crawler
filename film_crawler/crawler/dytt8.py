@@ -26,12 +26,9 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
 
             soup = BeautifulSoup(resp_content, 'html.parser')
             items = soup.select('.co_content8 table a')
-            if not self.check_max_item_limit(len(items)):
-                return film_download_info_list
             for item in items:
                 if item.font is not None:
                     item.font.unwrap()
-                # item.font.unwrap()
                 title = ''.join(item.contents)
                 info_url = 'http://s.dydytt.net'+item['href']
                 film_download_info_list.append(FilmDownloadInfo(title=title, url=info_url))
@@ -40,4 +37,4 @@ class Dytt8Crawler(FilmDownloadInfoCrawler):
         except Exception as e:
             logger.warn(e)
 
-        return film_download_info_list
+        return self.filter(name, film_download_info_list)
