@@ -16,8 +16,8 @@ if __name__ == '__main__':
     plt.rcParams['axes.unicode_minus'] = False
 
     data = pd.read_csv('query_info_collect.csv', names=['origin_name', 'name', 'douban_rate', 'douban_rate_people',
-                                                     'director', 'writer', 'cast', 'type', 'country', 'release_time',
-                                                     'duration'])
+                                                        'director', 'writer', 'cast', 'type', 'country', 'release_time',
+                                                        'duration'])
 
     def save_bar(data, title, xlabel, ylabel):
         fig = plt.figure()
@@ -25,6 +25,8 @@ if __name__ == '__main__':
         ax.set_title(title)
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
+        plt.legend()
+        plt.grid(True)
         plt.savefig(title+'.png')
 
     # 去除空数据 -> 取年份 -> 计数统计 -> 取计数前30个 -> 按年份排序
