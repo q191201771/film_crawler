@@ -12,7 +12,7 @@ class PersistenceFilmQueryInfo(object):
     @staticmethod
     def save_to_file(film_query_info_list, filename):
         with open(filename, mode='w', encoding='utf-8') as file:
-            writer = csv.writer(file, lineterminator='\n')
+            writer = csv.writer(file, lineterminator='\r\n')
 
             for item in film_query_info_list:
                 try:
@@ -36,7 +36,7 @@ class PersistenceFilmQueryInfo(object):
     def load_from_file(filename):
         film_query_info_list = []
         with open(filename, encoding='utf-8') as file:
-            reader = csv.reader(file, lineterminator='\n')
+            reader = csv.reader(file, lineterminator='\r\n')
             for row in reader:
                 film = FilmQueryInfo(origin_name=row[0], name=row[1])
                 film.detail_info.douban_rate = row[2]
