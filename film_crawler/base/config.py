@@ -33,13 +33,13 @@ class Config:
     DOUBAN_FILM_QUERY_INFO_FILENAME = FILM_QUERY_INFO_TYPE_FILENAME_MAPPING[DOUBAN_FILM_QUERY_INFO_TYPE]
     # 2. 流程控制相关
     # 是否直接从本地文件加载
-    IS_LOAD_FILM_QUERY_INFO_FROM_FILE = True
+    IS_LOAD_FILM_QUERY_INFO_FROM_FILE = False
     # 是否写入本地文件中
     IS_SAVE_FILM_QUERY_INFO_TO_FILE = True
     # 是否抓取详细信息
     IS_FETCH_FILM_QUERY_DETAIL_INFO = True
     # 是否抓取下载信息
-    IS_FETCH_FILM_DOWNLOAD_INFO = True
+    IS_FETCH_FILM_DOWNLOAD_INFO = False
     # 是否统计
     IS_STAT_FILM_QUERY_INFO = True
     # 3. 内部配置相关
