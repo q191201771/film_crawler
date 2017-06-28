@@ -1,8 +1,8 @@
-
-*.csv
 *.log
 *.jpg
-*.png
+film_crawler/*.csv
+film_crawler/*.png
+dummy
 
 *.pyc
 .idea
