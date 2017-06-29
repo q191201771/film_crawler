@@ -18,6 +18,7 @@ class FilmQueryDetailInfo(object):
         self.duration_list = []
         self.alias = None # not persistence
         self.imdb = None # not persistence
+        self.mark_time = None
 
 
 class FilmDownloadInfo(object):
@@ -27,7 +28,7 @@ class FilmDownloadInfo(object):
 
 
 class FilmQueryInfo(object):
-    def __init__(self, origin_name, name, douban_url=None, download_info_list=None, douban_rate=None, douban_rate_count=None):
+    def __init__(self, origin_name, name, douban_url=None, download_info_list=None):
         self.origin_name = origin_name
         self.name = name
         self.douban_url = douban_url

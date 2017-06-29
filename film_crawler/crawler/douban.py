@@ -29,14 +29,18 @@ class DoubanCrawler(FilmQueryInfoCrawler):
                 logger.debug('crawl {}...'.format(url))
                 soup = BeautifulSoup(resp.content, 'html.parser')
 
-                for item in soup.select('.article .grid-view .item .info .title a'):
-                    origin_name = item.em.string
-                    item_url = item['href']
-                    film = FilmQueryInfo(origin_name=origin_name, name=origin_name.split('/')[0].strip(), douban_url=item_url)
+                for item in soup.select('.article .grid-view .item .info'): # .title a
+                    origin_name = item.select('.title a')[0].em.string
+                    item_url = item.select('.title a')[0]['href']
+                    film = FilmQueryInfo(origin_name=origin_name,
+                                         name=origin_name.split('/')[0].strip(),
+                                         douban_url=item_url)
                     self.film_query_info_list.append(film)
 
                     if is_fetch_detail_info:
                         film.detail_info = self.crawl_detail_info(film.douban_url)
+                        mark_time = item.select('.date')[0].string
+                        film.detail_info.mark_time = mark_time
                         Helper.sleep_uniform(Config.CRAWL_INTERVAL_MIN_SEC, Config.CRAWL_INTERVAL_MAX_SEC)
 
                 next_page = soup.select('.article .paginator .next a')

@@ -26,7 +26,8 @@ class PersistenceFilmQueryInfo(object):
                                      '/'.join(item.detail_info.type_list),
                                      '/'.join(item.detail_info.country_list),
                                      '/'.join(item.detail_info.release_time_list),
-                                     '/'.join(item.detail_info.duration_list)])
+                                     '/'.join(item.detail_info.duration_list),
+                                     item.detail_info.mark_time])
                 except UnicodeEncodeError:
                     pass
                 except Exception as e:
@@ -48,6 +49,7 @@ class PersistenceFilmQueryInfo(object):
                 film.detail_info.country_list = row[8].split('/')
                 film.detail_info.release_time_list = row[9].split('/')
                 film.detail_info.duration_list = row[10].split('/')
+                film.detail_info.mark_time = row[11]
                 film_query_info_list.append(film)
 
         return film_query_info_list
