@@ -29,7 +29,7 @@ def film_query_info_wrapper():
         StatFilmQueryInfo.stat_cast_list(films, '演员词云图.png')
         StatFilmQueryInfo.stat_director_list(films, '导演词云图.png')
         StatFilmQueryInfo.stat_writer_list(films, '编剧词云图.png')
-        StatFilmQueryInfo.stat_country_list(films, '制片国家词云图.png')
+        StatFilmQueryInfo.stat_country_list(films, '发行国家词云图.png')
 
     return films
 

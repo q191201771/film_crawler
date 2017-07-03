@@ -8,8 +8,25 @@
 # @brief
 #   学习下pyplot画图
 
+import random
+
 import pandas as pd
 import matplotlib.pyplot as plt
+
+
+class Colors(object):
+    def __init__(self):
+        self.colors = ['#e51c23', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#5677fc',
+                       '#03a9f4', '#00bcd4', '#009688', '#259b24', '#8bc34a', '#cddc39',
+                       '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#9e9e9e',
+                       '#607d8b']
+        # self.colors = ['#e00032', '#c51162', '#aa00ff', '#6200ea', '#304ffe', '#4d69ff', '#0091ea', '#00b8d4', '#00bfa5']
+        self.i = 0
+
+    def next(self):
+        c = self.colors[self.i % len(self.colors)]
+        self.i += 1
+        return c
 
 
 def save_basic_image(data, xlabel, ylabel, kind):
@@ -57,7 +74,23 @@ if __name__ == '__main__':
     data['country'] = data['country'].apply(cleaning_country)
 
     # ***
-    mt_country = data[['mark_time', 'country']]
+    fig = plt.figure(figsize=(20.48, 15.36))
+    ax = fig.add_subplot(1, 1, 1)
+    colors = Colors()
+    for country, _ in data.groupby('country'):
+        data[data.country == country].plot(ax=ax, x='douban_rate', y='douban_rate_people', marker='x',
+                                           # c=(random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)),
+                                           c=colors.next(),
+                                           label=country, kind='scatter')
+    ax.set_title('豆瓣评分及评分人数散点图')
+    ax.set_xlabel('豆瓣评分')
+    ax.set_ylabel('评分人数')
+    plt.legend() # 图例
+    plt.grid(True) # 网格
+    plt.savefig('豆瓣评分及评分人数散点图.png')
+
+    # ***
+    mt_country = data[['mark_time', 'country']].copy()
     mt_country['mark_time'] = mt_country['mark_time'].apply(lambda x: x[0:4])
     fig = plt.figure(figsize=(10.24, 7.68))
     ax = fig.add_subplot(1, 1, 1)
