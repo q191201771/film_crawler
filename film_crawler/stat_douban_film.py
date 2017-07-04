@@ -12,6 +12,7 @@ import random
 
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 
 
 class Colors(object):
@@ -41,9 +42,7 @@ def save_basic_image(data, xlabel, ylabel, kind):
     # ax = fig.add_subplot(data.plot(label=xlabel, kind=kind))
     ax = fig.add_subplot(1, 1, 1)
     data.plot(ax=ax, label=xlabel, kind=kind)
-    ax.set_title(title)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set(title=title, xlabel=xlabel, ylabel=ylabel)
     plt.legend() # 图例
     plt.grid(True) # 网格
     plt.savefig(filename)
@@ -57,9 +56,15 @@ def cleaning_country(x):
     }
     return x if x not in mapping else mapping[x]
 
+
+def percent_formatter(x, pos):
+    return '{:.1f}%'.format(x * 100)
+
+
 if __name__ == '__main__':
     plt.rcParams['font.sans-serif'] = ['simhei']
     plt.rcParams['axes.unicode_minus'] = False
+    plt.style.use('ggplot')
 
     data = pd.read_csv('query_info_collect.csv', names=['origin_name', 'name', 'douban_rate', 'douban_rate_people',
                                                         'director', 'writer', 'cast', 'type', 'country', 'release_time',
@@ -82,9 +87,7 @@ if __name__ == '__main__':
                                            # c=(random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)),
                                            c=colors.next(),
                                            label=country, kind='scatter')
-    ax.set_title('豆瓣评分及评分人数散点图')
-    ax.set_xlabel('豆瓣评分')
-    ax.set_ylabel('评分人数')
+    ax.set(title='豆瓣评分及评分人数散点图', xlabel='豆瓣评分', ylabel='评分人数')
     plt.legend() # 图例
     plt.grid(True) # 网格
     plt.savefig('豆瓣评分及评分人数散点图.png')
@@ -100,9 +103,8 @@ if __name__ == '__main__':
         mt_counts = group['mark_time'].value_counts().sort_index()
         mt_counts = mt_counts / all_mt_count
         mt_counts.plot(ax=ax, label=country, kind='line')
-    ax.set_title('每年观看电影各发行国家占比')
-    ax.set_xlabel('观看时间')
-    ax.set_ylabel('比例')
+    ax.set(title='每年观看电影各发行国家占比', xlabel='观看时间', ylabel='比例')
+    ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
     plt.legend()
     plt.savefig('每年观看电影各发行国家占比.png')
 
