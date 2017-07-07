@@ -36,8 +36,9 @@ def film_query_info_wrapper():
 
 def film_download_info_wrapper(films):
     download_info_crawlers = [
-        FilmDownloadInfoCrawlerFactory('dy2018'),
-        FilmDownloadInfoCrawlerFactory('dytt8')
+        # FilmDownloadInfoCrawlerFactory('dy2018'),
+        FilmDownloadInfoCrawlerFactory('dytt8'),
+        FilmDownloadInfoCrawlerFactory('btrenren')
     ]
 
     for film in films:

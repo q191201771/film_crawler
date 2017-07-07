@@ -5,12 +5,16 @@
 
 from .dy2018 import Dy2018Crawler
 from .dytt8 import Dytt8Crawler
+from .btrenren import BTRenRenCrawler
 from .base import FilmDownloadInfoCrawler
 
 
 class FilmDownloadInfoCrawlerFactory(object):
-    crawlers = {'dy2018': Dy2018Crawler,
-                'dytt8': Dytt8Crawler}
+    crawlers = {
+        'dy2018': Dy2018Crawler,
+        'dytt8': Dytt8Crawler,
+        'btrenren': BTRenRenCrawler
+    }
 
     def __new__(cls, name):
         if name in cls.crawlers:

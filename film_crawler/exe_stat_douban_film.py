@@ -48,6 +48,10 @@ def save_basic_image(data, xlabel, ylabel, kind):
     plt.savefig(filename)
 
 
+def percent_formatter(x, pos):
+    return '{:.1f}%'.format(x * 100)
+
+
 def cleaning_country(x):
     x = x.split('/')[0]
     mapping = {
@@ -55,10 +59,6 @@ def cleaning_country(x):
         '香港': '中国香港'
     }
     return x if x not in mapping else mapping[x]
-
-
-def percent_formatter(x, pos):
-    return '{:.1f}%'.format(x * 100)
 
 
 if __name__ == '__main__':
@@ -83,10 +83,8 @@ if __name__ == '__main__':
     ax = fig.add_subplot(1, 1, 1)
     colors = Colors()
     for country, _ in data.groupby('country'):
-        data[data.country == country].plot(ax=ax, x='douban_rate', y='douban_rate_people', marker='x',
-                                           # c=(random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)),
-                                           c=colors.next(),
-                                           label=country, kind='scatter')
+        data[data.country == country].plot(ax=ax, x='douban_rate', y='douban_rate_people', marker='x', c=colors.next(),
+                                           alpha=0.9, label=country, kind='scatter')
     ax.set(title='豆瓣评分及评分人数散点图', xlabel='豆瓣评分', ylabel='评分人数')
     plt.legend() # 图例
     plt.grid(True) # 网格

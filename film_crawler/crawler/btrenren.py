@@ -11,27 +11,27 @@ from film_crawler.data import FilmDownloadInfo
 from .base import FilmDownloadInfoCrawler
 
 
-class Dytt8Crawler(FilmDownloadInfoCrawler):
+class BTRenRenCrawler(FilmDownloadInfoCrawler):
+    def __init__(self):
+        FilmDownloadInfoCrawler.__init__(self)
+        self.domain = 'http://www.btrenren.com'
+
     def crawl(self, name):
         """return FilmDownloadInfo list"""
         film_download_info_list = []
-        url = 'http://s.dydytt.net/plus/search.php'
+        url = '{}/index.php/Search/index.html'.format(self.domain)
         params = {
-            'kwtype': 0,
-            'keyword': name.encode('gbk')
+            'search': name.encode('utf-8')
         }
 
         try:
-            resp_content = requests.get(url, params=params, timeout=30, headers=Config.CRAWLER_BASIC_HEADERS)\
-                                   .content.decode('gbk')
+            resp_content = requests.get(url, params=params, timeout=30, headers=Config.CRAWLER_BASIC_HEADERS).content
 
             soup = BeautifulSoup(resp_content, 'html.parser')
-            items = soup.select('.co_content8 table a')
+            items = soup.select('body > div.mb.cl > div.ml > div.item > div.title > p.tt.cl > a')
             for item in items:
-                if item.font is not None:
-                    item.font.unwrap()
-                title = ''.join(item.contents)
-                info_url = 'http://s.dydytt.net'+item['href']
+                title = item['title']
+                info_url = '{}{}'.format(self.domain, item['href'])
                 film_download_info_list.append(FilmDownloadInfo(title=title, url=info_url))
         except UnicodeDecodeError:
             pass

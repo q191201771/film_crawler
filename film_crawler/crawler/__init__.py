@@ -8,6 +8,7 @@ from .factory import FilmDownloadInfoCrawlerFactory
 from .douban import DoubanCrawler
 from .dy2018 import Dy2018Crawler
 from .dytt8 import Dytt8Crawler
+from .btrenren import BTRenRenCrawler
 
 __all__ = ['FilmQueryInfoCrawler', 'FilmDownloadInfoCrawler', 'FilmDownloadInfoCrawlerFactory', 'DoubanCrawler',
-           'Dy2018Crawler', 'Dytt8Crawler']
+           'Dy2018Crawler', 'Dytt8Crawler', 'BTRenRenCrawler']
